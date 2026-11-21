@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String decryptAccessToken(User user) {
-        return textEncryptor.decrypt(user.getAccessToken());
+    public String decryptAccessToken(String accessToken) {
+        return textEncryptor.decrypt(accessToken);
     }
 }

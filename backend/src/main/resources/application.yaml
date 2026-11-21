@@ -77,8 +77,7 @@ app:
   frontend-url: ${FRONTEND_URL}
 
   cors:
-    allowed-origins:
-      - ${FRONTEND_URL}
+    allowed-origins: ${FRONTEND_URL}
 
   # Text encrypter
   encryption:
@@ -91,3 +90,6 @@ app:
     chunk-size: 800
     chunk-overlap: 100
     api-delay-ms: 50
+
+  api:
+    github-api-base: ${GITHUB_API_BASE}

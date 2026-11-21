@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface UserService {
     public User upsertFromGithub(Map<String, Object> attributes, String accessToken, String scopes);
-    public String decryptAccessToken(User user);
+    public String decryptAccessToken(String accessToken);
 }
