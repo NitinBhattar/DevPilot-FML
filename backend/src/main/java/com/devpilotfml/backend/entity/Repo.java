@@ -12,8 +12,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "repositories", indexes = {
-        @Index(columnList = "user_id"),
-        @Index(columnList = "github_repo_id")
+        @Index(
+                name = "idx_userId_githubRepoId",
+                columnList = "user_id, github_repo_id"
+        )
 })
 @Data
 @NoArgsConstructor
@@ -70,16 +72,16 @@ public class Repo {
     @Builder.Default
     private long filesProcessed = 0L;
 
-    @Column(name = "error_message", nullable = false)
+    @Column(name = "error_message")
     private String errorMessage;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @Column(name = "indexed_at", nullable = false)
+    @Column(name = "indexed_at")
     private Instant indexedAt;
 
     @PrePersist

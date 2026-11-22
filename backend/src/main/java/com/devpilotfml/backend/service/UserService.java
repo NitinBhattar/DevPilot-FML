@@ -3,8 +3,10 @@ package com.devpilotfml.backend.service;
 import com.devpilotfml.backend.entity.User;
 
 import java.util.Map;
+import java.util.UUID;
 
 public interface UserService {
     public User upsertFromGithub(Map<String, Object> attributes, String accessToken, String scopes);
     public String decryptAccessToken(String accessToken);
+    public User requiredUser(UUID userId);
 }

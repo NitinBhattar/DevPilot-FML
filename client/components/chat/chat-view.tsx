@@ -105,7 +105,7 @@ export function ChatView({ repoId }: { repoId: string }) {
           : "Waiting for indexing to finish"
       }
       actions={
-        <Button variant="outline" size="sm" render={<Link href="/dashboard" />}>
+        <Button variant="outline" size="sm" nativeButton={false} render={<Link href="/dashboard" />}>
           <ArrowLeft data-icon="inline-start" />
           Repos
         </Button>

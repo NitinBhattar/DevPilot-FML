@@ -1,6 +1,7 @@
 package com.devpilotfml.backend.service.impl;
 
 import com.devpilotfml.backend.entity.User;
+import com.devpilotfml.backend.exception.NotFoundException;
 import com.devpilotfml.backend.mapper.GithubUserMapper;
 import com.devpilotfml.backend.repository.UserRepository;
 import com.devpilotfml.backend.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 import static com.devpilotfml.backend.util.Conversions.toLong;
 
@@ -37,5 +39,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String decryptAccessToken(String accessToken) {
         return textEncryptor.decrypt(accessToken);
+    }
+
+    @Override
+    public User requiredUser(UUID userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found for id: " + userId));
     }
 }

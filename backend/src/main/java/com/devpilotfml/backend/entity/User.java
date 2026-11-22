@@ -45,7 +45,7 @@ public class User {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", updatable = false)
     private Instant updatedAt;
 
     @PrePersist

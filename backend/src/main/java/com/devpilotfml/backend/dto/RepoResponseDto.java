@@ -2,10 +2,12 @@ package com.devpilotfml.backend.dto;
 
 import com.devpilotfml.backend.enums.IndexStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
 import java.time.Instant;
 import java.util.UUID;
 
+@Builder
 public record RepoResponseDto(
     UUID id,
     Long githubRepoId,

@@ -52,15 +52,15 @@ spring:
       embedding:
         model: text-embedding-3-small
 
-  # PgVector
-  vectorstore:
-    pgvector:
-      initialize: true
-      dimensions: 1536
-      index-type: HNSW
-      distance-type: COSINE_DISTANCE
+    # PgVector
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 1536
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
 
-  # Github OAuth2 config
+  # GitHub OAuth2 config
   security:
     oauth2:
       client:
@@ -92,4 +92,6 @@ app:
     api-delay-ms: 50
 
   api:
-    github-api-base: ${GITHUB_API_BASE}
+    github:
+      api-base: ${GITHUB_API_BASE}
+      api-delay-ms: 50

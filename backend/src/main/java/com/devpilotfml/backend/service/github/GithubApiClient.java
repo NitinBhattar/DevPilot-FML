@@ -16,11 +16,11 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class GithubApiClient {
-    @Value("${app.api.github-api-base}")
-    private static String API_BASE;
+    @Value("${app.api.github.api-base}")
+    private String API_BASE;
 
-    private static final ParameterizedTypeReference<List<Map<String, Object>>> LIST_MAP = new ParameterizedTypeReference<>() {};
-    private static final ParameterizedTypeReference<Map<String, Object>> MAP = new ParameterizedTypeReference<>() {};
+    private final ParameterizedTypeReference<List<Map<String, Object>>> LIST_MAP = new ParameterizedTypeReference<>() {};
+    private final ParameterizedTypeReference<Map<String, Object>> MAP = new ParameterizedTypeReference<>() {};
 
     private RestClient client(String accessToken) {
         return RestClient.builder()
@@ -48,8 +48,8 @@ public class GithubApiClient {
                             // Pageable config
                             .queryParam("affiliation", "owner,collaborator,organization_member")
                             .queryParam("sort", "updated")
-                            .queryParam("per_page", "100")
-                            .queryParam("page", "currentPage")
+                            .queryParam("per_page", 100)
+                            .queryParam("page", currentPage)
                             .build())
                     .retrieve()
                     // JSON -> Java Map

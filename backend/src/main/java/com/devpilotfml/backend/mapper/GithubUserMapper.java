@@ -1,15 +1,15 @@
 package com.devpilotfml.backend.mapper;
 
 import com.devpilotfml.backend.entity.User;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
 import java.util.Map;
 
 import static com.devpilotfml.backend.util.Conversions.toLong;
 
-@Component
-public class GithubUserMapper {
-    public void updateEntityFromAttributes(Map<String, Object> attributes, User user) {
+@Mapper
+public interface GithubUserMapper {
+    default void updateEntityFromAttributes(Map<String, Object> attributes, User user) {
         // Extracting from attributes
         Long githubId = toLong(attributes.get("id"));
         String githubUsername = String.valueOf(attributes.get("login"));

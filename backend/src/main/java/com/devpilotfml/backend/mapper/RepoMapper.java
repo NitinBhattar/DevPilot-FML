@@ -2,9 +2,41 @@ package com.devpilotfml.backend.mapper;
 
 import com.devpilotfml.backend.dto.RepoResponseDto;
 import com.devpilotfml.backend.entity.Repo;
+import com.devpilotfml.backend.repository.RepoRepository;
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
+
+import java.util.Map;
+import java.util.UUID;
+
+import static com.devpilotfml.backend.util.Conversions.toLong;
 
 @Mapper
 public interface RepoMapper {
     public RepoResponseDto toDto(Repo repo);
+
+    default void toEntity(UUID userId, Map<String, Object> remote, Repo repo) {
+        Long githubRepoId = toLong(remote.get("id"));
+        String fullName = String.valueOf(remote.get("full_name"));
+        String[] parts = fullName.split("/", 2);
+
+        repo.setUserId(userId);
+        repo.setGithubRepoId(githubRepoId);
+        repo.setOwner(parts.length > 0 ? parts[0] : String.valueOf(remote.get("owner")));
+        repo.setName(parts.length > 1 ? parts[1] : String.valueOf(remote.get("name")));
+        repo.setFullName(fullName);
+        repo.setPrivate(Boolean.TRUE.equals(remote.get("private")));
+        repo.setDefaultBranch(remote.get("default_branch") != null ? String.valueOf(remote.get("default_branch")) : "main");
+        repo.setLanguage(remote.get("language") != null ? String.valueOf(remote.get("language")) : null);
+        repo.setHtmlUrl(remote.get("html_url") != null ? String.valueOf(remote.get("html_url")) : null);
+        repo.setDescription(remote.get("description") != null ? String.valueOf(remote.get("description")) : null);
+
+        if (repo.getOwner() == null || repo.getOwner().isBlank()) {
+            Object ownerObj = remote.get("owner");
+
+            if (ownerObj instanceof Map<?, ?> ownerMap && ownerMap.get("login") != null) {
+                repo.setOwner(String.valueOf(ownerMap.get("login")));
+            }
+        }
+    }
 }
