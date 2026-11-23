@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface RepoService {
     public List<RepoResponseDto> syncAndListRepos(UUID userId);
     public List<RepoResponseDto> repoSortedList(UUID userId);
-    public RepoResponseDto requiredRepo(UUID repoId, UUID userId);
+    public Repo requiredRepoEntity(UUID repoId, UUID userId);
+    public RepoResponseDto requiredRepoDto(UUID repoId, UUID userId);
     public IndexStatusResponseDto indexStatus(UUID repoId, UUID userId);
 }

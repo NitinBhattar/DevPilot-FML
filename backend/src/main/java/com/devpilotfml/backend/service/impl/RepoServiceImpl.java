@@ -75,7 +75,12 @@ public class RepoServiceImpl implements RepoService {
     }
 
     @Override
-    public RepoResponseDto requiredRepo(UUID repoId, UUID userId) {
+    public Repo requiredRepoEntity(UUID repoId, UUID userId) {
+        return repoRepository.findByIdAndUserId(repoId, userId).orElseThrow(() -> new NotFoundException("Repositories not found"));
+    }
+
+    @Override
+    public RepoResponseDto requiredRepoDto(UUID repoId, UUID userId) {
         Repo repo = repoRepository.findByIdAndUserId(repoId, userId).orElseThrow(() -> new NotFoundException("Repositories not found"));
         return repoMapper.toDto(repo);
     }

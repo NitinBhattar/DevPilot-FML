@@ -21,5 +21,13 @@ public interface ChatMessageMapper {
     @Mapping(target = "createdAt", ignore = true)
     public ChatMessage toAssistantMessage(UUID sessionId, String content, List<CitationDto> citations);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "sessionId", source = "sessionId")
+    @Mapping(target = "role", constant = "USER")
+    @Mapping(target = "content", source = "content")
+    @Mapping(target = "citations", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    public ChatMessage toUserMessage(UUID sessionId, String content);
+
     public ChatMessageResponseDto toDto(ChatMessage chatMessage);
 }

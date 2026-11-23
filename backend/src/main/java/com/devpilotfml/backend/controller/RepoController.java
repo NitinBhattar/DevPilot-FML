@@ -39,7 +39,7 @@ public class RepoController {
     @GetMapping("/{id}")
     public ResponseEntity<RepoResponseDto> getRepo(@PathVariable UUID id) {
         UUID userId = currentUser.require().getId();
-        RepoResponseDto repoResponseDto = repoService.requiredRepo(id, userId);
+        RepoResponseDto repoResponseDto = repoService.requiredRepoDto(id, userId);
 
         return ResponseEntity.ok(repoResponseDto);
     }

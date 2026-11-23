@@ -23,7 +23,6 @@ import java.util.UUID;
 public class ChatStreamHandler {
     private final ChatModel chatModel;
     private final ChatMessageRepository chatMessageRepository;
-    private final CitationMapper citationMapper;
     private final ChatMessageMapper chatMessageMapper;
 
     public SseEmitter stream(
